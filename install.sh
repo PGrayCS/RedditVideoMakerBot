@@ -47,12 +47,12 @@ done
 # Install dependencies for MacOS
 function install_macos(){
     # Check if homebrew is installed
-    if [ ! command -v brew &> /dev/null ]; then
+    if ! command -v brew &> /dev/null; then
         echo "Installing Homebrew"
-        # if it's is not installed, then install it in a NONINTERACTIVE way
-        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)" 
-        # Check for what arcitecture, so you can place path.
-        if [[ "uname -m" == "x86_64" ]]; then
+        # if it's not installed, then install it in a NONINTERACTIVE way
+        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # Check for what architecture, so you can place path.
+        if [[ "$(uname -m)" == "x86_64" ]]; then
             echo "export PATH=/usr/local/bin:$PATH" >> ~/.bash_profile && source ~/.bash_profile
         fi
     # If not
@@ -61,12 +61,12 @@ function install_macos(){
         echo "Homebrew is already installed"
     fi
     # Install the required packages
-    echo "Installing required Packages" 
-    if [! command --version python3 &> /dev/null ]; then
-	    echo "Installing python3"
-	    brew install python@3.10
+    echo "Installing required Packages"
+    if ! command -v python3 &> /dev/null; then
+            echo "Installing python3"
+            brew install python@3.10
     else
-	    echo "python3 already installed."
+            echo "python3 already installed."
     fi
     brew install tcl-tk python-tk
 } 
