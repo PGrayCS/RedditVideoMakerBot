@@ -8,13 +8,13 @@ def _listdir(d):  # listdir with full path
 
 
 def cleanup(reddit_id) -> int:
-    """Deletes all temporary assets in assets/temp
+    """Deletes temporary assets for a given Reddit post.
 
     Returns:
-        int: How many files were deleted
+        int: ``1`` if the folder existed and was removed, otherwise ``0``.
     """
     directory = f"../assets/temp/{reddit_id}/"
     if exists(directory):
         shutil.rmtree(directory)
-
         return 1
+    return 0
